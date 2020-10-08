@@ -1,0 +1,12 @@
+---
+- name: Configure smth
+  hosts: all
+  remote_user: 'root'
+  become_user: 'root'
+  become: yes
+  ignore_errors: yes
+  tasks:
+    - name: ensure httpd is at the latest version
+      yum:
+        name: "{{ package_name }}"
+        state: latest

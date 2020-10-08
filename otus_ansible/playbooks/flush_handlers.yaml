@@ -1,0 +1,35 @@
+---
+- name: Configure smth
+  hosts: all
+  gather_facts: no
+  remote_user: 'root'
+  become_user: 'root'
+  become: yes
+  tasks:
+    - name: copy wildfly config file
+      template:
+        src: 'wildfly.conf.j2'
+        dest: '~/wildfly.conf'
+      notify: restart web service
+
+    # Temporary solution
+    - name: restart services
+      meta: flush_handlers
+
+    - name: copy nifi config file
+      template:
+        src: 'nifi.conf.j2'
+        dest: '~/nifi.conf'
+      notify:
+        - restart web service
+        - restart docker
+
+  handlers:
+    - name: restart web service
+      service:
+        name: "{{ web_service_name | default('httpd') }}"
+        state: restarted
+    - name: restart docker
+      service:
+        name: 'docker'
+        state: restarted

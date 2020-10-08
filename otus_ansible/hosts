@@ -1,0 +1,11 @@
+################ All hosts
+[webservers]
+node1 ansible_host=192.168.56.109        #Ansible Node1
+node2 ansible_host=192.168.56.110        #Ansible Node2
+
+[appservers]
+#node3 ansible_host=192.168.56.108        #Ansible Node3
+
+[all:vars]
+ansible_ssh_user=root
+ansible_ssh_pass=user123

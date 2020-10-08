@@ -1,0 +1,14 @@
+---
+- name: Configure smth
+  hosts: all
+  remote_user: 'root'
+  become_user: 'root'
+  become: yes
+  tasks:
+    - name: smth shell command
+      shell: "date"
+      register: register_var
+
+    - name: show register stdout
+      debug:
+         msg: "{{ register_var.stdout }}"

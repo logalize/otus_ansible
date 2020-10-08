@@ -1,0 +1,4 @@
+---
+vault_wildfly_user_pass: 'wildfly12345'
+wildfly_user2: 'user'
+wildfly_user2_pass: 'pass123'

@@ -1,0 +1,11 @@
+---
+    - name: Configure smth
+      hosts: all
+      remote_user: 'root'
+      become_user: 'root'
+      become: yes
+      tasks:
+        - name: copy main config file
+          template:
+            src: 'nifi.conf.j2'
+            dest: '~/nifi.conf'

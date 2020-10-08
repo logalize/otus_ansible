@@ -1,0 +1,25 @@
+---
+- name: Configure smth
+  hosts: all
+  gather_facts: no
+  remote_user: 'root'
+  become_user: 'root'
+  become: yes
+  tasks:
+    - name: copy main config file
+      template:
+        src: 'wildfly.conf.j2'
+        dest: '~/wildfly.conf'
+      notify:
+        - restart docker
+        - restart web service
+
+  handlers:
+    - name: restart web service
+      service:
+        name: "{{ web_service_name | default('httpd') }}"
+        state: restarted
+    - name: restart docker
+      service:
+        name: 'docker'
+        state: restarted

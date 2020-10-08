@@ -1,0 +1,23 @@
+---
+- hosts: webservers
+  gather_facts: no
+  tasks:
+  - name: install httpd
+    yum:
+        name: httpd
+        state: present
+
+  - name: start httpd
+    service:
+      name: httpd
+      state: started
+
+  - name: get status httpd
+    shell: systemctl status httpd
+    register: httpd_status
+
+  - name: show status httpd
+    debug:
+      msg: "{{ httpd_status }}"
+    failed_when: "'running' not in httpd_status.stdout"
+

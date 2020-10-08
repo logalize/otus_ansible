@@ -1,0 +1,28 @@
+---
+- hosts: webservers
+  gather_facts: no
+  ignore_errors: yes
+  tasks:
+  - name: stop httpd
+    service:
+      name: httpd
+      state: stopped
+
+  - name: uninstall httpd
+    yum:
+      name: httpd
+      state: absent
+
+- hosts: appservers
+  gather_facts: no
+  ignore_errors: yes
+  tasks:
+  - name: stop tomcat
+    service:
+      name: tomcat
+      state: stopped
+
+  - name: uninstall tomcat
+    yum:
+      name: ['tomcat', 'tomcat-webapps', 'tomcat-admin-webapps', 'tomcat-docs-webapp', 'tomcat-javadoc']
+      state: absent

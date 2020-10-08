@@ -1,0 +1,31 @@
+---
+#Webservers
+wildfly_mode: 'standalone'
+wildfly_startup_wait: 60
+wildfly_shutdown_wait: 60
+
+#Nifi
+nifi_graceful_shutdown_seconds: 5
+nifi_base_dir: '/u01/nifi'
+nifi_etc_dir: '{{ nifi_base_dir }}'
+
+#Wildfly vault config
+## Location of WildFly
+jboss_home_dir: '/u02/app/wildfly'
+
+## The username who should own the process.
+jboss_user: 'wildfly'
+#wildfly_user_pass: "{{ vault_wildfly_user_pass }}"
+wildfly_user_pass: "wildfly123"
+
+###
+#os_root_user: "{{ vault_os_root_user }}"
+#os_root_pass: "{{ vault_os_root_pass }}"
+
+## The mode WildFly should start, standalone or domain
+# wildfly_mode: 'domain'
+
+## Configuration for standalone mode
+jboss_config: 'standalone.xml'
+
+jboss_console_log: '/var/log/wildfly/console.log'

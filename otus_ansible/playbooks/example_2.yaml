@@ -1,0 +1,29 @@
+---
+- hosts: webservers
+  gather_facts: no
+  ignore_errors: yes
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: present
+
+  - name: start httpd
+    service:
+      name: httpd
+      state: started
+
+- hosts: appservers
+  gather_facts: no
+  ignore_errors: yes
+  tasks:
+  - name: install tomcat
+    yum:
+      name: ['tomcat', 'tomcat-webapps', 'tomcat-admin-webapps', 'tomcat-docs-webapp', 'tomcat-javadoc']
+      state: present
+
+  - name: start tomcat
+    service:
+      name: tomcat
+      state: restarted
+

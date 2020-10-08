@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  gather_facts: no
+  tasks:
+  - name: install httpd
+    yum:
+        name: "{{ package_name }}"
+        state: present
+
+  - name: start httpd
+    service:
+      name: "{{ package_name }}"
+      state: started
