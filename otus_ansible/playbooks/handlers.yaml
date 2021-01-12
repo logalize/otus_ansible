@@ -1,6 +1,6 @@
 ---
 - name: Configure smth
-  hosts: all
+  hosts: webservers
   gather_facts: no
   remote_user: 'root'
   become_user: 'root'
